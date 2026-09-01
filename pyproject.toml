@@ -1,0 +1,11 @@
+[project]
+name = "cardioia"
+version = "0.1.0"
+description = "CardioIA - Phase 1: data collection and exploratory analysis for the FIAP AI course project"
+requires-python = ">=3.13"
+dependencies = [
+    "ipykernel>=7.3.0",
+    "jupyter>=1.1.1",
+    "matplotlib>=3.11.1",
+    "pandas>=3.0.5",
+]

@@ -1,0 +1,151 @@
+filename,original_filename,finding,view,sex,age,license,doi
+cxr_001.jpeg,auntminnie-a-2020_01_28_23_51_6665_2020_01_28_Vietnam_coronavirus.jpeg,Pneumonia/Viral/COVID-19,PA,M,65,,10.1056/nejmc2001272
+cxr_002.jpeg,auntminnie-b-2020_01_28_23_51_6665_2020_01_28_Vietnam_coronavirus.jpeg,Pneumonia/Viral/COVID-19,PA,M,65,,10.1056/nejmc2001272
+cxr_003.jpeg,auntminnie-c-2020_01_28_23_51_6665_2020_01_28_Vietnam_coronavirus.jpeg,Pneumonia/Viral/COVID-19,PA,M,65,,10.1056/nejmc2001272
+cxr_004.jpeg,auntminnie-d-2020_01_28_23_51_6665_2020_01_28_Vietnam_coronavirus.jpeg,Pneumonia/Viral/COVID-19,PA,M,65,,10.1056/nejmc2001272
+cxr_005.jpeg,nejmc2001573_f1a.jpeg,Pneumonia/Viral/COVID-19,PA,F,52,,10.1056/NEJMc2001573
+cxr_006.jpeg,nejmc2001573_f1b.jpeg,Pneumonia/Viral/COVID-19,PA,F,52,,10.1056/NEJMc2001573
+cxr_007.png,ARDSSevere.png,Pneumonia,PA,,,CC BY-SA,
+cxr_008.jpg,lancet-case2a.jpg,Pneumonia/Viral/COVID-19,PA,,,,10.1016/S0140-6736(20)30211-7
+cxr_009.jpg,lancet-case2b.jpg,Pneumonia/Viral/COVID-19,PA,,,,10.1016/S0140-6736(20)30211-7
+cxr_010.jpeg,SARS-10.1148rg.242035193-g04mr34g0-Fig8a-day0.jpeg,Pneumonia/Viral/SARS,AP,M,74,,10.1148/rg.242035193
+cxr_011.jpeg,SARS-10.1148rg.242035193-g04mr34g0-Fig8b-day5.jpeg,Pneumonia/Viral/SARS,AP,M,74,,10.1148/rg.242035193
+cxr_012.jpeg,SARS-10.1148rg.242035193-g04mr34g0-Fig8c-day10.jpeg,Pneumonia/Viral/SARS,AP,M,74,,10.1148/rg.242035193
+cxr_013.jpeg,SARS-10.1148rg.242035193-g04mr34g04a-Fig4a-day7.jpeg,Pneumonia/Viral/SARS,PA,F,29,,10.1148/rg.242035193
+cxr_014.jpeg,SARS-10.1148rg.242035193-g04mr34g04b-Fig4b-day12.jpeg,Pneumonia/Viral/SARS,PA,F,29,,10.1148/rg.242035193
+cxr_015.jpeg,SARS-10.1148rg.242035193-g04mr34g05x-Fig5-day9.jpeg,Pneumonia/Viral/SARS,PA,F,42,,10.1148/rg.242035193
+cxr_016.jpeg,SARS-10.1148rg.242035193-g04mr34g07a-Fig7a-day5.jpeg,Pneumonia/Viral/SARS,AP,F,46,,10.1148/rg.242035193
+cxr_017.jpeg,SARS-10.1148rg.242035193-g04mr34g07b-Fig7b-day12.jpeg,Pneumonia/Viral/SARS,AP,F,46,,10.1148/rg.242035193
+cxr_018.jpeg,SARS-10.1148rg.242035193-g04mr34g09a-Fig9a-day17.jpeg,Pneumonia/Viral/SARS,AP,F,73,,10.1148/rg.242035193
+cxr_019.jpeg,SARS-10.1148rg.242035193-g04mr34g09b-Fig9b-day19.jpeg,Pneumonia/Viral/SARS,AP,F,73,,10.1148/rg.242035193
+cxr_020.jpeg,SARS-10.1148rg.242035193-g04mr34g09c-Fig9c-day27.jpeg,Pneumonia/Viral/SARS,AP,F,73,,10.1148/rg.242035193
+cxr_021.jpg,1-s2.0-S0140673620303706-fx1_lrg.jpg,Pneumonia/Viral/COVID-19,PA,M,56,,10.1016/S0140-6736(20)30370-6
+cxr_022.jpeg,nCoV-radiol.2020200269.fig1-day7.jpeg,Pneumonia/Viral/COVID-19,PA,M,42,,10.1148/radiol.2020200269
+cxr_023.jpeg,nejmoa2001191_f1-PA.jpeg,Pneumonia/Viral/COVID-19,PA,M,35,,10.1056/NEJMoa2001191
+cxr_024.jpeg,nejmoa2001191_f3-PA.jpeg,Pneumonia/Viral/COVID-19,PA,M,35,,10.1056/NEJMoa2001191
+cxr_025.jpeg,nejmoa2001191_f4.jpeg,Pneumonia/Viral/COVID-19,PA,M,35,,10.1056/NEJMoa2001191
+cxr_026.jpeg,nejmoa2001191_f5-PA.jpeg,Pneumonia/Viral/COVID-19,PA,M,35,,10.1056/NEJMoa2001191
+cxr_027.jpeg,ryct.2020200034.fig2.jpeg,Pneumonia/Viral/COVID-19,PA,F,,,10.1148/ryct.2020200034
+cxr_028.jpeg,ryct.2020200034.fig5-day0.jpeg,Pneumonia/Viral/COVID-19,PA,M,,,10.1148/ryct.2020200034
+cxr_029.jpeg,ryct.2020200034.fig5-day4.jpeg,Pneumonia/Viral/COVID-19,PA,M,,,10.1148/ryct.2020200034
+cxr_030.jpeg,ryct.2020200034.fig5-day7.jpeg,Pneumonia/Viral/COVID-19,PA,M,,,10.1148/ryct.2020200034
+cxr_031.jpeg,ryct.2020200028.fig1a.jpeg,Pneumonia/Viral/COVID-19,PA,F,59,,10.1148/ryct.2020200028
+cxr_032.jpg,jkms-35-e79-g001-l-a.jpg,Pneumonia/Viral/COVID-19,AP,M,54,CC BY-NC-SA,10.3346/jkms.2020.35.e79
+cxr_033.jpg,jkms-35-e79-g001-l-b.jpg,Pneumonia/Viral/COVID-19,AP,M,54,CC BY-NC-SA,10.3346/jkms.2020.35.e79
+cxr_034.jpg,jkms-35-e79-g001-l-c.jpg,Pneumonia/Viral/COVID-19,AP,M,54,CC BY-NC-SA,10.3346/jkms.2020.35.e79
+cxr_035.jpeg,radiol.2020200490.fig3.jpeg,Pneumonia/Viral/COVID-19,PA,F,53,,10.1148/radiol.2020200490
+cxr_036.jpg,1-s2.0-S0929664620300449-gr2_lrg-a.jpg,Pneumonia/Viral/COVID-19,AP,F,55,CC BY-NC-ND,10.1016/j.jfma.2020.02.007
+cxr_037.jpg,1-s2.0-S0929664620300449-gr2_lrg-b.jpg,Pneumonia/Viral/COVID-19,AP,F,55,CC BY-NC-ND,10.1016/j.jfma.2020.02.007
+cxr_038.jpg,1-s2.0-S0929664620300449-gr2_lrg-c.jpg,Pneumonia/Viral/COVID-19,AP,F,55,CC BY-NC-ND,10.1016/j.jfma.2020.02.007
+cxr_039.jpg,1-s2.0-S0929664620300449-gr2_lrg-d.jpg,Pneumonia/Viral/COVID-19,AP,F,55,CC BY-NC-ND,10.1016/j.jfma.2020.02.007
+cxr_040.jpg,covid-19-pneumonia-15-PA.jpg,Pneumonia/Viral/COVID-19,PA,M,,CC BY-NC-SA,
+cxr_041.jpg,covid-19-pneumonia-2.jpg,Pneumonia/Viral/COVID-19,AP,F,50,CC BY-NC-SA,
+cxr_042.jpg,covid-19-pneumonia-7-PA.jpg,Pneumonia/Viral/COVID-19,PA,M,70,CC BY-NC-SA,
+cxr_043.png,covid-19-pneumonia-14-PA.png,Pneumonia/Viral/COVID-19,PA,F,70,CC BY-NC-SA,
+cxr_044.jpg,covid-19-pneumonia-12.jpg,Pneumonia/Viral/COVID-19,AP,M,75,CC BY-NC-SA,
+cxr_045.jpg,acute-respiratory-distress-syndrome-ards-1.jpg,Pneumonia,AP Supine,M,50,CC BY-NC-SA,
+cxr_046.jpg,acute-respiratory-distress-syndrome-ards.jpg,Pneumonia,AP,M,65,CC BY-NC-SA,
+cxr_047.png,ards-secondary-to-tiger-snake-bite.png,Pneumonia,AP Supine,M,35,CC BY-NC-SA,
+cxr_048.png,pneumocystis-pneumonia-2-PA.png,Pneumonia/Fungal/Pneumocystis,PA,M,40,CC BY-NC-SA,
+cxr_049.jpg,streptococcus-pneumoniae-pneumonia-1.jpg,Pneumonia/Bacterial/Streptococcus,AP Supine,,65,CC BY-NC-SA,
+cxr_050.jpg,pneumonia-7.jpg,Pneumonia/Bacterial/Streptococcus,AP,F,30,CC BY-NC-SA,
+cxr_051.jpg,streptococcus-pneumoniae-pneumonia-temporal-evolution-1-day0.jpg,Pneumonia/Bacterial/Streptococcus,AP,F,25,CC BY-NC-SA,
+cxr_052.jpg,streptococcus-pneumoniae-pneumonia-temporal-evolution-1-day1.jpg,Pneumonia/Bacterial/Streptococcus,AP,F,25,CC BY-NC-SA,
+cxr_053.jpg,streptococcus-pneumoniae-pneumonia-temporal-evolution-1-day2.jpg,Pneumonia/Bacterial/Streptococcus,PA,F,25,CC BY-NC-SA,
+cxr_054.jpg,streptococcus-pneumoniae-pneumonia-temporal-evolution-1-day3.jpg,Pneumonia/Bacterial/Streptococcus,AP,F,25,CC BY-NC-SA,
+cxr_055.jpeg,39EE8E69-5801-48DE-B6E3-BE7D1BCF3092.jpeg,Pneumonia/Viral/COVID-19,AP,M,43,,
+cxr_056.jpeg,7C69C012-7479-493F-8722-ABC29C60A2DD.jpeg,Pneumonia/Viral/COVID-19,PA,M,62,,
+cxr_057.jpeg,2C10A413-AABE-4807-8CCE-6A2025594067.jpeg,Pneumonia/Viral/COVID-19,AP,M,45,,
+cxr_058.jpeg,E1724330-1866-4581-8CD8-CEC9B8AFEDDE.jpeg,Pneumonia/Viral/COVID-19,AP,M,43,,
+cxr_059.jpeg,8FDE8DBA-CFBD-4B4C-B1A4-6F36A93B7E87.jpeg,Pneumonia/Viral/COVID-19,PA,M,67,,
+cxr_060.jpeg,9C34AF49-E589-44D5-92D3-168B3B04E4A6.jpeg,Pneumonia/Viral/COVID-19,PA,M,67,,
+cxr_061.jpeg,F2DE909F-E19C-4900-92F5-8F435B031AC6.jpeg,Pneumonia/Viral/COVID-19,AP Supine,M,58,,
+cxr_062.jpeg,31BA3780-2323-493F-8AED-62081B9C383B.jpeg,Pneumonia/Viral/COVID-19,AP,M,58,,
+cxr_063.jpeg,F051E018-DAD1-4506-AD43-BE4CA29E960B.jpeg,No Finding,PA,F,61,,
+cxr_064.jpeg,1312A392-67A3-4EBF-9319-810CF6DA5EF6.jpeg,Pneumonia/Viral/COVID-19,PA,M,50,,
+cxr_065.png,23E99E2E-447C-46E5-8EB2-D35D12473C39.png,Pneumonia/Viral/COVID-19,PA,F,46,,
+cxr_066.jpeg,7AF6C1AF-D249-4BD2-8C26-449304105D03.jpeg,Pneumonia/Viral/COVID-19,PA,M,71,,
+cxr_067.jpeg,1B734A89-A1BF-49A8-A1D3-66FAFA4FAC5D.jpeg,Pneumonia/Viral/COVID-19,PA,F,69,,
+cxr_068.jpeg,CD50BA96-6982-4C80-AE7B-5F67ACDBFA56.jpeg,Pneumonia/Viral/COVID-19,PA,M,27,,
+cxr_069.jpeg,85E52EB3-56E9-4D67-82DA-DEA247C82886.jpeg,Pneumonia/Viral/COVID-19,AP Supine,F,78,,
+cxr_070.jpeg,6CB4EFC6-68FA-4CD5-940C-BEFA8DAFE9A7.jpeg,Pneumonia/Viral/COVID-19,PA,F,71,,
+cxr_071.jpeg,01E392EE-69F9-4E33-BFCE-E5C968654078.jpeg,Pneumonia/Viral/COVID-19,PA,F,55,,
+cxr_072.jpeg,F63AB6CE-1968-4154-A70F-913AF154F53D.jpeg,Pneumonia/Viral/COVID-19,AP,F,58,,
+cxr_073.jpeg,2C26F453-AF3B-4517-BB9E-802CF2179543.jpeg,Pneumonia/Viral/COVID-19,PA,M,68,,
+cxr_074.jpeg,93FE0BB1-022D-4F24-9727-987A07975FFB.jpeg,Pneumonia/Viral/COVID-19,PA,M,64,,
+cxr_075.jpeg,B59DD164-51D5-40DF-A926-6A42DD52EBE8.jpeg,Pneumonia/Viral/COVID-19,AP Supine,M,63,,
+cxr_076.jpeg,F4341CE7-73C9-45C6-99C8-8567A5484B63.jpeg,Pneumonia/Viral/COVID-19,PA,M,47,,
+cxr_077.jpeg,E63574A7-4188-4C8D-8D17-9D67A18A1AFA.jpeg,Pneumonia/Viral/COVID-19,PA,M,47,,
+cxr_078.jpeg,5CBC2E94-D358-401E-8928-965CCD965C5C.jpeg,Pneumonia/Viral/COVID-19,AP,F,72,,
+cxr_079.jpeg,446B2CB6-B572-40AB-B01F-1910CA07086A.jpeg,Pneumonia/Viral/COVID-19,AP Supine,M,53,,
+cxr_080.jpeg,80446565-E090-4187-A031-9D3CEAA586C8.jpeg,Pneumonia/Viral/COVID-19,PA,M,73,,
+cxr_081.jpeg,7E335538-2F86-424E-A0AB-6397783A38D0.jpeg,Pneumonia/Viral/COVID-19,AP,M,87,,
+cxr_082.jpeg,D7AF463C-2369-492D-908D-BE1911CCD74C.jpeg,Pneumonia/Viral/COVID-19,AP Supine,F,82,,
+cxr_083.jpg,all14238-fig-0001-m-b.jpg,Pneumonia/Viral/COVID-19,PA,F,67,,10.1111/all.14238
+cxr_084.jpg,all14238-fig-0001-m-c.jpg,Pneumonia/Viral/COVID-19,PA,F,67,,10.1111/all.14238
+cxr_085.jpg,all14238-fig-0002-m-d.jpg,Pneumonia/Viral/COVID-19,AP Supine,M,36,,10.1111/all.14238
+cxr_086.jpg,all14238-fig-0002-m-e.jpg,Pneumonia/Viral/COVID-19,AP Supine,M,36,,10.1111/all.14238
+cxr_087.jpg,all14238-fig-0002-m-f.jpg,Pneumonia/Viral/COVID-19,AP Supine,M,36,,10.1111/all.14238
+cxr_088.jpg,1-s2.0-S1684118220300608-main.pdf-001.jpg,Pneumonia/Viral/COVID-19,PA,F,46,CC BY-NC-ND,10.1016/j.jmii.2020.03.003
+cxr_089.jpg,1-s2.0-S1684118220300608-main.pdf-002.jpg,Pneumonia/Viral/COVID-19,PA,F,46,CC BY-NC-ND,10.1016/j.jmii.2020.03.003
+cxr_090.png,ciaa199.pdf-001-a.png,Pneumonia/Viral/COVID-19,PA,F,71,,10.1093/cid/ciaa199
+cxr_091.png,ciaa199.pdf-001-b.png,Pneumonia/Viral/COVID-19,PA,M,38,,10.1093/cid/ciaa199
+cxr_092.jpg,kjr-21-e24-g001-l-a.jpg,Pneumonia/Viral/COVID-19,AP,,,CC BY-NC-SA,10.3348/kjr.2020.0132
+cxr_093.jpg,kjr-21-e24-g002-l-a.jpg,Pneumonia/Viral/COVID-19,AP,,,CC BY-NC-SA,10.3348/kjr.2020.0132
+cxr_094.jpg,kjr-21-e24-g003-l-a.jpg,Pneumonia/Viral/COVID-19,AP,,,CC BY-NC-SA,10.3348/kjr.2020.0132
+cxr_095.png,1-s2.0-S1684118220300682-main.pdf-002-a1.png,Pneumonia/Viral/COVID-19,PA,,,CC BY-NC-ND,10.1016/j.jmii.2020.03.008
+cxr_096.png,1-s2.0-S1684118220300682-main.pdf-002-a2.png,Pneumonia/Viral/COVID-19,PA,,,CC BY-NC-ND,10.1016/j.jmii.2020.03.008
+cxr_097.png,1-s2.0-S1684118220300682-main.pdf-003-b1.png,Pneumonia/Viral/COVID-19,PA,,,CC BY-NC-ND,10.1016/j.jmii.2020.03.008
+cxr_098.png,1-s2.0-S1684118220300682-main.pdf-003-b2.png,Pneumonia/Viral/COVID-19,PA,,,CC BY-NC-ND,10.1016/j.jmii.2020.03.008
+cxr_099.jpg,gr1_lrg-a.jpg,Pneumonia/Viral/COVID-19,PA,F,25,,10.1016/S1473-3099(20)30111-0
+cxr_100.jpg,gr1_lrg-b.jpg,Pneumonia/Viral/COVID-19,PA,F,25,,10.1016/S1473-3099(20)30111-0
+cxr_101.jpeg,7D2CF6CE-F529-4470-8356-D33FFAF98600.jpeg,Pneumonia/Viral/COVID-19,AP,M,65,,
+cxr_102.jpeg,FE9F9A5D-2830-46F9-851B-1FF4534959BE.jpeg,Pneumonia/Viral/COVID-19,PA,M,65,,
+cxr_103.jpeg,171CB377-62FF-4B76-906C-F3787A01CB2E.jpeg,Pneumonia/Viral/COVID-19,AP Supine,M,61,,
+cxr_104.jpeg,5931B64A-7B97-485D-BE60-3F1EA76BC4F0.jpeg,Pneumonia/Viral/COVID-19,AP Supine,M,61,,
+cxr_105.jpeg,C6EA0BE5-B01E-4113-B194-18D956675E25.jpeg,Pneumonia/Viral/COVID-19,AP Supine,M,61,,
+cxr_106.png,7EF28E12-F628-4BEC-A8C5-E6277C2E4F60.png,Pneumonia/Viral/COVID-19,AP Supine,M,60,,
+cxr_107.png,41591_2020_819_Fig1_HTML.webp-day5.png,Pneumonia/Viral/COVID-19,PA,F,,,10.1038/s41591-020-0819-2
+cxr_108.png,41591_2020_819_Fig1_HTML.webp-day10.png,Pneumonia/Viral/COVID-19,PA,F,,,10.1038/s41591-020-0819-2
+cxr_109.jpeg,5e6dd879fde9502400e58b2f.jpeg,Pneumonia/Viral/COVID-19,AP,M,50,,
+cxr_110.jpg,covid-19-pneumonia-19.jpg,Pneumonia/Viral/COVID-19,AP,F,75,CC BY-NC-SA,
+cxr_111.jpg,kjr-21-e25-g001-l-a.jpg,Pneumonia/Viral/COVID-19,PA,F,40,CC BY-NC-SA,10.3348/kjr.2020.0112
+cxr_112.jpeg,03BF7561-A9BA-4C3C-B8A0-D3E585F73F3C.jpeg,Pneumonia/Viral/COVID-19,PA,F,65,,
+cxr_113.jpeg,353889E0-A1E8-4F9E-A0B8-F24F36BCFBFB.jpeg,Pneumonia/Viral/COVID-19,PA,M,,,
+cxr_114.jpeg,figure1-5e73d7ae897e27ff066a30cb-98.jpeg,Pneumonia/Viral/COVID-19,AP,M,33,,
+cxr_115.jpeg,figure1-5e75d0940b71e1b702629659-98-right.jpeg,Pneumonia/Viral/COVID-19,PA,M,84,,
+cxr_116.jpeg,figure1-5e71be566aa8714a04de3386-98-left.jpeg,Pneumonia/Viral/COVID-19,PA,M,44,,
+cxr_117.jpeg,1F6343EE-AFEC-4B7D-97F5-62797EE18767.jpeg,Pneumonia/Viral/COVID-19,AP Supine,F,52,,
+cxr_118.jpeg,5A78BCA9-5B7A-440D-8A4E-AE7710EA6EAD.jpeg,Pneumonia/Viral/COVID-19,AP Supine,M,40,,
+cxr_119.jpeg,2B8649B2-00C4-4233-85D5-1CE240CF233B.jpeg,Pneumonia/Viral/COVID-19,AP Supine,M,60,,
+cxr_120.jpeg,2966893D-5DDF-4B68-9E2B-4979D5956C8E.jpeg,Pneumonia/Viral/COVID-19,PA,M,30,,
+cxr_121.jpeg,B2D20576-00B7-4519-A415-72DE29C90C34.jpeg,Pneumonia/Viral/COVID-19,AP Supine,M,60,,
+cxr_122.jpeg,6C94A287-C059-46A0-8600-AFB95F4727B7.jpeg,Pneumonia/Viral/COVID-19,PA,M,60,,
+cxr_123.jpg,pneumococcal-pneumonia-day0.jpg,Pneumonia/Bacterial/Streptococcus,PA,F,40,CC BY-NC-SA,
+cxr_124.jpg,pneumococcal-pneumonia-day7.jpg,Pneumonia/Bacterial/Streptococcus,PA,F,40,CC BY-NC-SA,
+cxr_125.jpg,pneumococcal-pneumonia-day35.jpg,Pneumonia/Bacterial/Streptococcus,PA,F,40,CC BY-NC-SA,
+cxr_126.png,parapneumonic-effusion-1-PA.png,Pneumonia/Bacterial/Streptococcus,PA,M,45,CC BY-NC-SA,
+cxr_127.jpg,right-upper-lobe-pneumonia-9-PA.jpg,Pneumonia/Bacterial/Streptococcus,PA,M,75,CC BY-NC-SA,
+cxr_128.png,chlamydia-pneumonia-PA.png,Pneumonia/Bacterial/Chlamydophila,PA,M,50,CC BY-NC-SA,
+cxr_129.jpg,aspiration-pneumonia-5-day0.jpg,Pneumonia/Bacterial/E.Coli,AP Supine,F,80,CC BY-NC-SA,
+cxr_130.jpg,aspiration-pneumonia-5-day3.jpg,Pneumonia/Bacterial/E.Coli,AP Supine,F,80,CC BY-NC-SA,
+cxr_131.jpg,aspiration-pneumonia-5-day10.jpg,Pneumonia/Bacterial/E.Coli,AP Supine,F,80,CC BY-NC-SA,
+cxr_132.jpg,aspiration-pneumonia-5-day27.jpg,Pneumonia/Bacterial/E.Coli,AP Supine,F,80,CC BY-NC-SA,
+cxr_133.jpg,cavitating-pneumonia-4-day0-PA.jpg,Pneumonia/Bacterial/Streptococcus,PA,M,60,CC BY-NC-SA,
+cxr_134.png,cavitating-pneumonia-4-day28-PA.png,Pneumonia/Bacterial/Streptococcus,PA,M,60,CC BY-NC-SA,
+cxr_135.jpg,covid-19-pneumonia-30-PA.jpg,Pneumonia/Viral/COVID-19,PA,M,55,CC BY-NC-SA,
+cxr_136.jpeg,6b44464d-73a7-4cf3-bbb6-ffe7168300e3.annot.original.jpeg,Pneumonia/Viral/COVID-19,PA,F,31,,10.1148/cases.20201558
+cxr_137.jpeg,58cb9263f16e94305c730685358e4e_jumbo.jpeg,Pneumonia/Viral/COVID-19,PA,F,70,CC BY-NC-SA,
+cxr_138.jpeg,9fdd3c3032296fd04d2cad5d9070d4_jumbo.jpeg,Pneumonia/Viral/COVID-19,PA,F,70,CC BY-NC-SA,
+cxr_139.jpg,covid-19-pneumonia-rapidly-progressive-admission.jpg,Pneumonia/Viral/COVID-19,PA,M,60,CC BY-NC-SA,
+cxr_140.jpg,covid-19-pneumonia-rapidly-progressive-12-hours.jpg,Pneumonia/Viral/COVID-19,PA,M,60,CC BY-NC-SA,
+cxr_141.jpg,covid-19-pneumonia-rapidly-progressive-3-days.jpg,Pneumonia/Viral/COVID-19,PA,M,60,CC BY-NC-SA,
+cxr_142.jpg,covid-19-rapidly-progressive-acute-respiratory-distress-syndrome-ards-admission.jpg,Pneumonia/Viral/COVID-19,PA,F,70,CC BY-NC-SA,
+cxr_143.jpg,covid-19-rapidly-progressive-acute-respiratory-distress-syndrome-ards-day-1.jpg,Pneumonia/Viral/COVID-19,PA,F,70,CC BY-NC-SA,
+cxr_144.jpg,covid-19-rapidly-progressive-acute-respiratory-distress-syndrome-ards-day-2.jpg,Pneumonia/Viral/COVID-19,PA,F,70,CC BY-NC-SA,
+cxr_145.jpg,covid-19-rapidly-progressive-acute-respiratory-distress-syndrome-ards-day-3.jpg,Pneumonia/Viral/COVID-19,PA,F,70,CC BY-NC-SA,
+cxr_146.png,covid-19-infection-exclusive-gastrointestinal-symptoms-pa.png,Pneumonia/Viral/COVID-19,PA,M,75,CC BY-NC-SA,
+cxr_147.png,covid-19-pneumonia-28.png,Pneumonia/Viral/COVID-19,PA,M,55,CC BY-NC-SA,
+cxr_148.jpg,klebsiella-pneumonia-1.jpg,Pneumonia/Bacterial/Klebsiella,PA,F,62,CC BY-NC-SA,
+cxr_149.jpg,pneumocystis-jirovecii-pneumonia-3-1.jpg,Pneumonia/Fungal/Pneumocystis,PA,F,40,CC BY-NC-SA,
+cxr_150.jpg,pneumocystis-jirovecii-pneumonia-3-2.jpg,Pneumonia/Fungal/Pneumocystis,PA,F,40,CC BY-NC-SA,
