@@ -1,21 +1,56 @@
+# Python
 __pycache__/
-*.py[oc]
-build/
-dist/
-wheels/
+*.py[cod]
 *.egg-info
+build/
+wheels/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
 
+# Virtual environments
 .venv
+venv/
+env/
 
+# Jupyter
 .ipynb_checkpoints/
 
-assets/images/*.jpg
-assets/images/*.jpeg
-assets/images/*.png
+# Node / React portal
+node_modules/
+dist/
+.vite/
+*.log
+npm-debug.log*
+yarn-error.log*
 
-data/raw/heart-disease.zip
+# Large or re-downloadable data
+data/images/*.jpg
+data/images/*.jpeg
+data/images/*.png
+data/raw/ecg/
+data/raw/covid_chestxray_metadata.csv
+*.zip
 
+# Trained models
+*.keras
+*.h5
+*.joblib
+*.pkl
+
+# Temporary files
 tmp_*
 
+# Credentials and environment variables
+.env
+.env.*
+kaggle.json
+
+# Editor / OS
+.vscode/
+.idea/
+*.swp
 .DS_Store
 Thumbs.db
+desktop.ini

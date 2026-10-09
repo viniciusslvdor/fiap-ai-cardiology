@@ -1,14 +1,14 @@
 """Downloads a sample of chest X-ray images from the public
-ieee8023/covid-chestxray-dataset for CardioIA Part 3."""
+ieee8023/covid-chestxray-dataset for CardioIA."""
 import csv
 import urllib.parse
 import urllib.request
 from pathlib import Path
 
-BASE = Path(__file__).resolve().parent.parent
+BASE = Path(__file__).resolve().parents[2]
 METADATA_URL = "https://raw.githubusercontent.com/ieee8023/covid-chestxray-dataset/master/metadata.csv"
 METADATA = BASE / "data" / "raw" / "covid_chestxray_metadata.csv"
-OUT_DIR = BASE / "assets" / "images"
+OUT_DIR = BASE / "data" / "images"
 OUT_METADATA = OUT_DIR / "images_metadata.csv"
 RAW_BASE = "https://raw.githubusercontent.com/ieee8023/covid-chestxray-dataset/master/images/"
 
