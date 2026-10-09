@@ -1,0 +1,141 @@
+.page {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+}
+
+.brandPanel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+  padding: 48px clamp(24px, 6vw, 80px);
+  background: linear-gradient(150deg, #0b1f2e 0%, #0f3d3a 100%);
+  color: #e2e8f0;
+}
+
+.brandPanel h1 {
+  font-size: 2.25rem;
+  color: #fff;
+}
+
+.brandPanel p {
+  margin: 0;
+  max-width: 420px;
+  color: #cbd5e1;
+}
+
+.brandPanel ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.brandPanel li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #99f6e4;
+}
+
+.logo {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: var(--color-danger);
+  color: #fff;
+}
+
+.formPanel {
+  display: grid;
+  place-items: center;
+  padding: 32px 16px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 380px;
+}
+
+.form h2 {
+  font-size: 1.5rem;
+}
+
+.subtitle {
+  margin: -10px 0 4px;
+  color: var(--color-text-muted);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.error {
+  color: var(--color-danger);
+  font-weight: 500;
+}
+
+.formError {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--color-danger-soft);
+  color: var(--color-danger);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.submit {
+  width: 100%;
+  padding: 12px;
+}
+
+.demo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-primary-soft);
+  font-size: 0.85rem;
+}
+
+.demo p {
+  margin: 0;
+  word-break: break-all;
+}
+
+.note {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+@media (max-width: 860px) {
+  .page {
+    grid-template-columns: 1fr;
+  }
+
+  .brandPanel {
+    padding: 32px 16px;
+  }
+
+  .brandPanel ul {
+    display: none;
+  }
+}

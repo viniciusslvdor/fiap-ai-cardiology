@@ -1,0 +1,18 @@
+[
+  { "id": 1, "name": "Ana Beatriz Moura", "age": 58, "sex": "F", "lastVisit": "2026-09-22", "status": "Under follow-up", "risk": "high" },
+  { "id": 2, "name": "Carlos Eduardo Lima", "age": 64, "sex": "M", "lastVisit": "2026-09-30", "status": "Awaiting tests", "risk": "high" },
+  { "id": 3, "name": "Fernanda Rocha", "age": 41, "sex": "F", "lastVisit": "2026-08-14", "status": "Discharged", "risk": "low" },
+  { "id": 4, "name": "João Pedro Alves", "age": 35, "sex": "M", "lastVisit": "2026-09-05", "status": "Under follow-up", "risk": "low" },
+  { "id": 5, "name": "Mariana Costa", "age": 72, "sex": "F", "lastVisit": "2026-10-01", "status": "Under follow-up", "risk": "high" },
+  { "id": 6, "name": "Roberto Nunes", "age": 49, "sex": "M", "lastVisit": "2026-07-28", "status": "Awaiting tests", "risk": "moderate" },
+  { "id": 7, "name": "Luciana Ferreira", "age": 55, "sex": "F", "lastVisit": "2026-09-18", "status": "Under follow-up", "risk": "moderate" },
+  { "id": 8, "name": "Paulo Henrique Souza", "age": 67, "sex": "M", "lastVisit": "2026-09-26", "status": "Under follow-up", "risk": "high" },
+  { "id": 9, "name": "Camila Ribeiro", "age": 29, "sex": "F", "lastVisit": "2026-06-10", "status": "Discharged", "risk": "low" },
+  { "id": 10, "name": "Marcos Vinícius Teixeira", "age": 46, "sex": "M", "lastVisit": "2026-09-12", "status": "Awaiting tests", "risk": "moderate" },
+  { "id": 11, "name": "Patrícia Gomes", "age": 61, "sex": "F", "lastVisit": "2026-09-29", "status": "Under follow-up", "risk": "moderate" },
+  { "id": 12, "name": "Ricardo Almeida", "age": 53, "sex": "M", "lastVisit": "2026-08-30", "status": "Discharged", "risk": "low" },
+  { "id": 13, "name": "Sônia Carvalho", "age": 79, "sex": "F", "lastVisit": "2026-10-03", "status": "Awaiting tests", "risk": "high" },
+  { "id": 14, "name": "Thiago Martins", "age": 38, "sex": "M", "lastVisit": "2026-07-15", "status": "Discharged", "risk": "low" },
+  { "id": 15, "name": "Juliana Pires", "age": 44, "sex": "F", "lastVisit": "2026-09-08", "status": "Under follow-up", "risk": "low" },
+  { "id": 16, "name": "Antônio Barbosa", "age": 70, "sex": "M", "lastVisit": "2026-09-24", "status": "Under follow-up", "risk": "moderate" }
+]

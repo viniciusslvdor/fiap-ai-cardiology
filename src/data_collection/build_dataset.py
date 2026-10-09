@@ -1,9 +1,9 @@
-"""Combines the 4 UCI Heart Disease databases into a single CSV for CardioIA - Phase 1."""
+"""Combines the 4 UCI Heart Disease databases into a single CSV for CardioIA."""
 import csv
 from pathlib import Path
 
-RAW_DIR = Path(__file__).resolve().parent.parent / "data" / "raw" / "heart-disease"
-OUT_PATH = Path(__file__).resolve().parent.parent / "data" / "processed" / "cardioai_numeric_dataset.csv"
+RAW_DIR = Path(__file__).resolve().parents[2] / "data" / "raw" / "heart-disease"
+OUT_PATH = Path(__file__).resolve().parents[2] / "data" / "processed" / "cardioai_numeric_dataset.csv"
 
 COLUMNS = [
     "age", "sex", "cp", "trestbps", "chol", "fbs", "restecg",

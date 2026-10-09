@@ -1,0 +1,44 @@
+symptom_1,symptom_2,associated_condition
+chest pain,chest tightness,Acute Myocardial Infarction
+chest tightness,pain radiating to the arm,Acute Myocardial Infarction
+chest pain,cold sweat,Acute Myocardial Infarction
+pain radiating to the arm,nausea,Acute Myocardial Infarction
+cold sweat,shortness of breath,Acute Myocardial Infarction
+chest pain,pain on exertion,Angina
+pain on exertion,relief with rest,Angina
+chest tightness,relief with rest,Angina
+chest pain,shortness of breath,Angina
+shortness of breath,constant tiredness,Heart Failure
+swollen legs,constant tiredness,Heart Failure
+shortness of breath when lying down,swollen legs,Heart Failure
+shortness of breath,shortness of breath when lying down,Heart Failure
+shortness of breath on exertion,rapid weight gain,Heart Failure
+palpitations,racing heart,Tachycardia
+racing heart,dizziness,Tachycardia
+palpitations,irregular heartbeat,Cardiac Arrhythmia
+irregular heartbeat,dizziness,Cardiac Arrhythmia
+palpitations,fainting,Cardiac Arrhythmia
+irregular heartbeat,constant tiredness,Atrial Fibrillation
+palpitations,shortness of breath,Atrial Fibrillation
+irregular heartbeat,shortness of breath,Atrial Fibrillation
+dizziness,fainting,Cardiac Syncope
+fainting,palpitations,Cardiac Syncope
+dizziness when standing up,fainting,Orthostatic Hypotension
+dizziness when standing up,dizziness,Orthostatic Hypotension
+high blood pressure,headache,Arterial Hypertension
+high blood pressure,dizziness,Arterial Hypertension
+high blood pressure,blurred vision,Hypertensive Crisis
+headache,blurred vision,Hypertensive Crisis
+high blood pressure,chest pain,Hypertensive Crisis
+chest pain,fever,Pericarditis
+pain that worsens when breathing,relief when leaning forward,Pericarditis
+chest pain,pain that worsens when breathing,Pericarditis
+fever,palpitations,Myocarditis
+fever,constant tiredness,Myocarditis
+sudden shortness of breath,pain that worsens when breathing,Pulmonary Embolism
+calf pain,sudden shortness of breath,Pulmonary Embolism
+calf pain,swollen legs,Deep Vein Thrombosis
+calf pain,redness in the leg,Deep Vein Thrombosis
+shortness of breath on exertion,fainting,Aortic Stenosis
+pain on exertion,fainting,Aortic Stenosis
+fever,heart murmur,Endocarditis

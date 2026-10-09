@@ -1,0 +1,6 @@
+[
+  { "id": 1, "name": "Dr. Helena Duarte", "specialty": "Clinical cardiology" },
+  { "id": 2, "name": "Dr. Rafael Monteiro", "specialty": "Electrophysiology" },
+  { "id": 3, "name": "Dr. Beatriz Sampaio", "specialty": "Heart failure" },
+  { "id": 4, "name": "Dr. Gustavo Prado", "specialty": "Preventive cardiology" }
+]

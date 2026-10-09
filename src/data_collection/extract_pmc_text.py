@@ -1,9 +1,9 @@
-"""Extracts the clean English text of the ERICO editorial downloaded from PMC for CardioIA Part 2."""
+"""Extracts the clean English text of the ERICO editorial downloaded from PMC for the CardioIA text corpus."""
 import re
 from pathlib import Path
 
-SRC = Path(__file__).resolve().parent.parent / "tmp_pmc.html"
-OUT = Path(__file__).resolve().parent.parent / "docs" / "erico_cad_prognosis_public_health.txt"
+SRC = Path(__file__).resolve().parents[2] / "tmp_pmc.html"
+OUT = Path(__file__).resolve().parents[2] / "data" / "text" / "erico_cad_prognosis_public_health.txt"
 
 HEADER = """MARINHO, Fatima. Prognosis of Coronary Artery Disease in Public Hospitals
 in Brazil: The ERICO Study and the Application of Knowledge in Public Health.

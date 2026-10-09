@@ -1,0 +1,32 @@
+{
+  "tensorflow": "2.21.0",
+  "ptbdb_binary": {
+    "accuracy": 0.9615,
+    "precision (abnormal)": 0.9757,
+    "recall (abnormal)": 0.9708,
+    "f1 (abnormal)": 0.9733,
+    "epochs_run": 30,
+    "best_epoch": 24,
+    "train_loss": 0.0523,
+    "validation_loss": 0.1038,
+    "n_test": 2182
+  },
+  "mitbih_multiclass": {
+    "accuracy": 0.9728,
+    "precision (macro)": 0.8442,
+    "recall (macro)": 0.8935,
+    "f1 (macro)": 0.865,
+    "epochs_run": 41,
+    "best_epoch": 35,
+    "train_loss": 0.0791,
+    "validation_loss": 0.086,
+    "n_test": 21892,
+    "recall_per_class": {
+      "N - Normal": 0.9839,
+      "S - Supraventricular": 0.7554,
+      "V - Ventricular": 0.9351,
+      "F - Fusion": 0.821,
+      "Q - Unknown": 0.972
+    }
+  }
+}

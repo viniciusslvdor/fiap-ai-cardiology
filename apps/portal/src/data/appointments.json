@@ -1,0 +1,7 @@
+[
+  { "id": "seed-1", "patientId": 1, "patientName": "Ana Beatriz Moura", "daysFromToday": 0, "time": "09:00", "doctor": "Dr. Helena Duarte", "notes": "Follow-up with echocardiogram results." },
+  { "id": "seed-2", "patientId": 8, "patientName": "Paulo Henrique Souza", "daysFromToday": 0, "time": "14:30", "doctor": "Dr. Rafael Monteiro", "notes": "Review 24h Holter monitor." },
+  { "id": "seed-3", "patientId": 5, "patientName": "Mariana Costa", "daysFromToday": 1, "time": "10:00", "doctor": "Dr. Beatriz Sampaio", "notes": "" },
+  { "id": "seed-4", "patientId": 11, "patientName": "Patrícia Gomes", "daysFromToday": 3, "time": "08:30", "doctor": "Dr. Gustavo Prado", "notes": "Annual check-up." },
+  { "id": "seed-5", "patientId": 13, "patientName": "Sônia Carvalho", "daysFromToday": 5, "time": "16:00", "doctor": "Dr. Helena Duarte", "notes": "Bring blood test results." }
+]
