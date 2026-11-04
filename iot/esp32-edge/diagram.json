@@ -1,0 +1,73 @@
+{
+  "version": 1,
+  "author": "Vinicius Salvador - CardioIA",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht1",
+      "top": -134.1,
+      "left": -149.4,
+      "attrs": { "temperature": "36.5", "humidity": "55" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btnBeat",
+      "top": 140,
+      "left": -200,
+      "attrs": { "color": "red", "label": "Heartbeat (key B)", "key": "b" }
+    },
+    {
+      "type": "wokwi-potentiometer",
+      "id": "potHr",
+      "top": 30,
+      "left": -230,
+      "attrs": { "value": "230" }
+    },
+    { "type": "wokwi-mpu6050", "id": "imu1", "top": -120, "left": 160, "attrs": {} },
+    {
+      "type": "wokwi-slide-switch",
+      "id": "swWifi",
+      "top": 200,
+      "left": 200,
+      "attrs": { "value": "1" }
+    },
+    { "type": "wokwi-led", "id": "ledOnline", "top": 40, "left": 250, "attrs": { "color": "green", "label": "Online" } },
+    { "type": "wokwi-led", "id": "ledAlert", "top": 40, "left": 310, "attrs": { "color": "red", "label": "Alert" } },
+    { "type": "wokwi-resistor", "id": "r1", "top": 120, "left": 240, "rotate": 90, "attrs": { "value": "220" } },
+    { "type": "wokwi-resistor", "id": "r2", "top": 120, "left": 300, "rotate": 90, "attrs": { "value": "220" } }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+
+    [ "dht1:VCC", "esp:3V3", "red", [] ],
+    [ "dht1:GND", "esp:GND.1", "black", [] ],
+    [ "dht1:SDA", "esp:15", "green", [] ],
+
+    [ "btnBeat:1.l", "esp:4", "orange", [] ],
+    [ "btnBeat:2.l", "esp:GND.1", "black", [] ],
+
+    [ "potHr:VCC", "esp:3V3", "red", [] ],
+    [ "potHr:GND", "esp:GND.1", "black", [] ],
+    [ "potHr:SIG", "esp:34", "violet", [] ],
+
+    [ "imu1:VCC", "esp:3V3", "red", [] ],
+    [ "imu1:GND", "esp:GND.2", "black", [] ],
+    [ "imu1:SDA", "esp:21", "blue", [] ],
+    [ "imu1:SCL", "esp:22", "gold", [] ],
+
+    [ "swWifi:1", "esp:GND.2", "black", [] ],
+    [ "swWifi:2", "esp:27", "cyan", [] ],
+    [ "swWifi:3", "esp:3V3", "red", [] ],
+
+    [ "esp:25", "r1:1", "green", [] ],
+    [ "r1:2", "ledOnline:A", "green", [] ],
+    [ "ledOnline:C", "esp:GND.2", "black", [] ],
+    [ "esp:26", "r2:1", "red", [] ],
+    [ "r2:2", "ledAlert:A", "red", [] ],
+    [ "ledAlert:C", "esp:GND.2", "black", [] ]
+  ],
+  "dependencies": {}
+}
