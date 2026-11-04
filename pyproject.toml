@@ -1,15 +1,18 @@
 [project]
 name = "cardioia"
-version = "0.2.0"
-description = "CardioIA - FIAP AI course project (Phase 1: data collection and EDA; Phase 2: NLP, risk classification, React portal and ECG MLP)"
+version = "0.3.0"
+description = "CardioIA - FIAP AI course project (Phase 1: data collection and EDA; Phase 2: NLP, risk classification, React portal and ECG MLP; Phase 3: IoT monitoring, REST alerts and neuromorphic LIF network)"
 requires-python = ">=3.13"
 dependencies = [
+    "fastapi>=0.115",
     "ipykernel>=7.3.0",
     "jupyter>=1.1.1",
     "kagglehub>=0.3",
     "matplotlib>=3.11.1",
     "pandas>=3.0.5",
+    "requests>=2.32",
     "scikit-learn>=1.5",
     "seaborn>=0.13",
     "tensorflow>=2.20",
+    "uvicorn>=0.32",
 ]
