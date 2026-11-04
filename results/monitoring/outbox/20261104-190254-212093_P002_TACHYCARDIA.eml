@@ -1,0 +1,44 @@
+Subject: [CardioIA] HIGH RISK - patient P002: TACHYCARDIA
+From: cardioia-monitor@localhost
+To: care-team@cardioia.example
+Date: Wed, 04 Nov 2026 19:02:54 -0300
+Message-ID: <179382977421.33484.15092356750596732322@cardioia.local>
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="===============2965164252582108276=="
+
+--===============2965164252582108276==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+CardioIA automatic alert - patient P002
+Reading #172 captured at 2026-11-04T21:57:53.927612Z
+
+Findings:
+- Heart rate 157 bpm (limit 120 bpm) [high]
+
+Heart rate: 157 bpm | Temperature: 36.6 =C2=B0C | still for 120 s
+
+Suggested action: contact the patient and check the vital signs.
+This is an automatic message from an academic simulation. It is not a diagnos=
+is.
+
+--===============2965164252582108276==
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+<html><body style=3D"font-family: Arial, sans-serif">
+  <h2 style=3D"color:#c62828">CardioIA - high-risk alert</h2>
+  <p>Patient <b>P002</b>, reading #172 captured at
+     2026-11-04T21:57:53.927612Z.</p>
+  <ul><li><b>TACHYCARDIA</b>: Heart rate 157 bpm (limit 120 bpm) (high)</li><=
+/ul>
+  <p>Heart rate: 157 bpm | Temperature: 36.6 =C2=B0C | still for 120 s</p>
+  <p><b>Suggested action:</b> contact the patient and check the vital signs.<=
+/p>
+  <p style=3D"color:#777;font-size:12px">Automatic message from an academic s=
+imulation. Not a diagnosis.</p>
+</body></html>
+
+--===============2965164252582108276==--

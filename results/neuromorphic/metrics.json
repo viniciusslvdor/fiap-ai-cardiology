@@ -1,0 +1,126 @@
+{
+  "dataset": "PTB Diagnostic ECG (Kaggle heartbeat), 80/20 stratified split, seed 42",
+  "n_train": 11641,
+  "n_test": 2911,
+  "models": {
+    "A": {
+      "model": "A - Logistic Regression (raw signal)",
+      "accuracy": 0.7859841978701477,
+      "balanced_accuracy": 0.7848964256773524,
+      "precision_abnormal": 0.9038776624795194,
+      "recall_abnormal": 0.7873453853472883,
+      "recall_normal": 0.7824474660074165,
+      "f1_abnormal": 0.8415967454869057,
+      "roc_auc": 0.8711974821789596,
+      "train_seconds": 0.17016159999911906,
+      "inference_ms_per_beat": 0.000472586739223485
+    },
+    "B": {
+      "model": "B - LIF spiking network (200 neurons)",
+      "accuracy": 0.8667124699416008,
+      "balanced_accuracy": 0.8677882268814561,
+      "precision_abnormal": 0.9454261954261954,
+      "recall_abnormal": 0.8653663177925784,
+      "recall_normal": 0.8702101359703337,
+      "f1_abnormal": 0.9036264282165921,
+      "roc_auc": 0.9366593002837958,
+      "train_seconds": 7.373555099999066,
+      "inference_ms_per_beat": 0.4639982480252797,
+      "spikes_per_beat": 255.1016845703125,
+      "activity": 0.006820900831371546
+    },
+    "C": {
+      "model": "C - same random features, no spikes",
+      "accuracy": 0.9460666437650292,
+      "balanced_accuracy": 0.9447862357234678,
+      "precision_abnormal": 0.9769494850416871,
+      "recall_abnormal": 0.9476688867745005,
+      "recall_normal": 0.9419035846724351,
+      "f1_abnormal": 0.9620864525476938,
+      "roc_auc": 0.9844423875548509,
+      "train_seconds": 5.067400400002953,
+      "inference_ms_per_beat": 0.237465269667807
+    }
+  },
+  "neurons_sweep": [
+    {
+      "neurons": 25,
+      "accuracy": 0.7661,
+      "balanced_accuracy": 0.7654,
+      "recall_abnormal": 0.7669,
+      "spikes_per_beat": 17.778099060058594,
+      "seconds": 0.9269
+    },
+    {
+      "neurons": 50,
+      "accuracy": 0.8052,
+      "balanced_accuracy": 0.8119,
+      "recall_abnormal": 0.7969,
+      "spikes_per_beat": 68.00650024414062,
+      "seconds": 1.6873
+    },
+    {
+      "neurons": 100,
+      "accuracy": 0.8406,
+      "balanced_accuracy": 0.8543,
+      "recall_abnormal": 0.8235,
+      "spikes_per_beat": 119.62660217285156,
+      "seconds": 4.0338
+    },
+    {
+      "neurons": 200,
+      "accuracy": 0.8667,
+      "balanced_accuracy": 0.8678,
+      "recall_abnormal": 0.8654,
+      "spikes_per_beat": 255.10169982910156,
+      "seconds": 8.9026
+    },
+    {
+      "neurons": 400,
+      "accuracy": 0.8894,
+      "balanced_accuracy": 0.8827,
+      "recall_abnormal": 0.8977,
+      "spikes_per_beat": 582.0267944335938,
+      "seconds": 18.2635
+    }
+  ],
+  "noise_robustness": [
+    {
+      "sigma": 0.0,
+      "A - LogReg": 0.786,
+      "B - LIF": 0.8667,
+      "C - no spikes": 0.9461
+    },
+    {
+      "sigma": 0.02,
+      "A - LogReg": 0.7643,
+      "B - LIF": 0.8485,
+      "C - no spikes": 0.7939
+    },
+    {
+      "sigma": 0.05,
+      "A - LogReg": 0.6901,
+      "B - LIF": 0.7791,
+      "C - no spikes": 0.687
+    },
+    {
+      "sigma": 0.1,
+      "A - LogReg": 0.6441,
+      "B - LIF": 0.6929,
+      "C - no spikes": 0.5565
+    },
+    {
+      "sigma": 0.2,
+      "A - LogReg": 0.6025,
+      "B - LIF": 0.7056,
+      "C - no spikes": 0.4112
+    }
+  ],
+  "lif_parameters": {
+    "neurons": 200,
+    "tau_steps": 8.0,
+    "threshold": 1.0,
+    "refractory_steps": 2,
+    "windows": 8
+  }
+}

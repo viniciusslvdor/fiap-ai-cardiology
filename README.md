@@ -53,11 +53,81 @@ Charts and metrics are saved in `results/ecg/`. The PTB model shows mild overfit
 
 ### Web portal (React)
 
-`apps/portal/` is a React + Vite app with a simulated login (fake JWT in `localStorage`) and protected routes, a dashboard (total patients, scheduled appointments, appointments today, high-risk cases), a patient table with search and risk filter, and an appointment form with validation. It uses Context API, `useState`, `useEffect`, `useContext` and `useReducer`, a fake API backed by local JSON, CSS Modules and a responsive layout.
+`apps/portal/` is a React + Vite app with a simulated login (fake JWT in `localStorage`) and protected routes, a dashboard (total patients, scheduled appointments, appointments today, high-risk cases), a patient table with search and risk filter, an appointment form with validation and a real-time monitoring page for the wearable. It uses Context API, `useState`, `useEffect`, `useContext` and `useReducer`, a fake API backed by local JSON, CSS Modules and a responsive layout.
 
 <p align="center">
 <img src="assets/demo.png" alt="CardioIA portal dashboard" width="100%">
 </p>
+
+### IoT wearable (ESP32 + Wokwi)
+
+A simulated cardiac wearable built on an ESP32 in Wokwi. Sensors: DHT22 (temperature and humidity), a push button
+used as a pulse sensor (each press is a heartbeat, key `B`), a potentiometer that sets a simulated heart rate while
+the button is idle, and an MPU6050 accelerometer (movement and falls). A slide switch simulates the network, and two
+LEDs show the connection and alert states.
+
+- `iot/esp32-edge/` processes the data on the device. Each reading is checked against the limits (above 120 or below
+  50 bpm, 38 °C or more, below 35 °C, fall) and stored in a 4,000-reading buffer (16 bytes each). When the simulated
+  Wi-Fi is on, the stored readings are sent through `Serial.println` and removed. During long outages the buffer
+  lowers its resolution instead of dropping the oldest data: 24 h offline are kept at about one reading every 32 s,
+  with every alert. An optional SPIFFS copy (`USE_SPIFFS 1`) is available for a physical ESP32.
+- `iot/esp32-mqtt/` publishes the readings over MQTT (PubSubClient, `broker.hivemq.com`):
+  - JSON readings go to `cardioia/vs26/P001/vitals`;
+  - `online`/`offline` (Last Will) goes to `.../status`.
+
+  Readings recorded while offline are published when the connection returns, with their age, so they are plotted
+  at the right time.
+
+Details: [edge computing](docs/phase3/edge_computing.md) · [MQTT and dashboard](docs/phase3/mqtt_dashboard.md).
+
+Wokwi: [*edge project link*](https://wokwi.com/projects/479792054499838977) and [*MQTT project link*](https://wokwi.com/projects/479792384566470657)
+
+### Real-time monitoring
+
+The wearable data can be followed in two places, both subscribed to the same MQTT topics:
+
+- **Portal page** (`/monitoring` in `apps/portal/`). It connects to the broker from the browser (MQTT over WebSocket) and shows:
+  - an alert banner;
+  - heart rate, temperature, movement and device status cards;
+  - heart rate and temperature charts with limit lines (1, 5 or 15 min);
+  - the list of recent alerts.
+
+  Readings recorded while offline are placed at their capture time.
+- **Node-RED dashboard** (`iot/node-red/flows.json`, Node-RED 4 + `@flowfuse/node-red-dashboard`). It validates the
+  messages, checks the limits again and shows charts, gauges, an alert indicator and notifications
+  ([screenshot](assets/phase3/node-red-dashboard.png)).
+
+<p align="center">
+<img src="assets/phase3/portal-monitoring.png" alt="CardioIA portal monitoring page with an active alert" width="100%">
+</p>
+
+### Monitoring API and e-mail alerts
+
+`src/monitoring/` has a FastAPI service that stores the readings (`POST /api/vitals`, duplicates ignored), a REST
+client and a monitor that:
+
+- reads the new readings (`GET /api/vitals?after_id=`);
+- evaluates each patient's recent history (tachycardia, bradycardia, fever, hypothermia, fall, no movement);
+- sends an e-mail on high risk (SMTP, or a `.eml` file in `results/monitoring/outbox/`);
+- records the alert (`POST /api/alerts`).
+
+In the demo with 5 simulated patients it generated 7 e-mails and ignored an isolated 126 bpm spike. Node-RED can
+forward the ESP32 readings to the same API. Details: [REST API and alerts](docs/phase3/rest_api_alerts.md).
+
+### Neuromorphic ECG classifier (LIF)
+
+`notebooks/neuromorphic_lif_vs_logreg.ipynb` compares a logistic regression with a 200-neuron leaky
+integrate-and-fire network on the PTB heartbeats:
+
+| Model | Clean test data | Noise σ = 0.2 |
+|---|---|---|
+| Logistic regression | 0.786 accuracy | 0.603 |
+| LIF network | 0.867 accuracy (ROC-AUC 0.937) | 0.706 |
+| Same features without spikes | 0.946 accuracy | 0.411 |
+
+The LIF network was the most robust model under noise, with under 1% of neurons active per step. The model without
+spikes scored higher on clean data but collapsed with noise. Details:
+[comparison](docs/phase3/neuromorphic_comparison.md) · video: *YouTube link*.
 
 ## Folder structure
 
@@ -70,11 +140,17 @@ cardioai/
 │   └── images/           # chest X-ray sample + metadata
 ├── src/
 │   ├── data_collection/  # scripts that download/build the datasets
-│   └── nlp/              # symptom extraction and risk classifier
-├── notebooks/            # EDA, risk classifier and ECG classifier
+│   ├── nlp/              # symptom extraction and risk classifier
+│   └── monitoring/       # REST API, client, risk rules and e-mail alerts
+├── iot/
+│   ├── esp32-edge/       # ESP32 sketch + Wokwi diagram: local processing and offline buffer
+│   ├── esp32-mqtt/       # ESP32 sketch + Wokwi diagram: MQTT
+│   └── node-red/         # Node-RED flow (dashboard)
+├── notebooks/            # EDA, risk classifier, ECG classifier, LIF vs. logistic regression
 ├── apps/portal/          # React + Vite portal
-├── results/              # generated outputs (nlp/, ecg/)
-├── assets/               # FIAP logo and portal screenshot
+├── docs/phase3/          # IoT, API and neuromorphic reports
+├── results/              # generated outputs (nlp/, ecg/, monitoring/, neuromorphic/)
+├── assets/               # FIAP logo and screenshots
 ├── pyproject.toml        # Python dependencies (uv)
 └── uv.lock
 ```
@@ -95,7 +171,22 @@ uv run python src/nlp/risk_classifier.py                 # risk classifier (--se
 uv run jupyter notebook                                  # opens the notebooks (saved already executed)
 
 cd apps/portal && npm install && npm run dev             # portal at http://localhost:5173
+
+uv run python src/monitoring/run_demo.py                 # monitoring API + risk rules + e-mail demo
 ```
+
+**ESP32 in Wokwi.** On [wokwi.com](https://wokwi.com) create a new ESP32 project and replace `sketch.ino` and
+`diagram.json` with the files of `iot/esp32-edge/` (or `iot/esp32-mqtt/`), and add the libraries listed in
+`libraries.txt` (Library Manager). Slide the switch left to go offline and right to sync; type `s` in the Serial
+Monitor for buffer statistics. Locally, `pio run -d iot/esp32-mqtt` builds the firmware for the Wokwi VS Code
+extension (`wokwi.toml`).
+
+**Node-RED.** `npm install -g node-red`, run `node-red`, install `@flowfuse/node-red-dashboard` in *Manage palette*,
+import `iot/node-red/flows.json` and open `http://localhost:1880/dashboard/cardioia`. To also send the readings to the
+REST API, start the API (`uv run python src/monitoring/api.py`) and Node-RED with `CARDIOIA_API_URL=http://127.0.0.1:8000`.
+
+**Real e-mails.** Set `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD` and `ALERT_EMAIL_TO` before running the
+monitor (e.g. Gmail with an app password); without them the e-mails are saved as `.eml` files.
 
 If the ECG download fails with a credentials error, an invalid `~/.kaggle/kaggle.json` is usually the cause: fix it with a valid Kaggle token or download the dataset manually into `data/raw/ecg/`.
 
@@ -106,6 +197,7 @@ If the ECG download fails with a credentials error, an invalid `~/.kaggle/kaggle
 - **Bias.** The UCI data mixes 4 institutions with very different disease prevalence (from about 36% in Hungary to 93% in Switzerland) and has missing values; the X-ray sample is ~75% COVID-19/viral pneumonia; the ECG data comes from few patients and is split by heartbeat, not by patient (optimistic results); the risk classifier learns writing patterns from a small, non-diverse set of sentences.
 - **Errors matter.** False negatives (a severe case treated as mild) are the most dangerous error, which is why the high-risk recall is analyzed; false positives cause unnecessary alarms.
 - **Privacy.** Health data is sensitive personal data under Brazil's LGPD; the portal's authentication is simulated and offers no real security.
+- **IoT security.** The IoT prototype uses the public HiveMQ broker without TLS or login, so anyone can read or publish on its topics; only a pseudonymous patient ID is sent. Real use would need TLS (port 8883), per-device credentials and topic ACLs, as discussed in the MQTT report. The REST API and the Node-RED dashboard have no authentication either.
 
 ## Data sources and licenses
 

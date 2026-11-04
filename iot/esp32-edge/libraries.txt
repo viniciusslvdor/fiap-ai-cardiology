@@ -1,0 +1,2 @@
+# Wokwi library list (Library Manager names)
+DHT sensor library for ESPx

@@ -1,0 +1,45 @@
+Subject: [CardioIA] HIGH RISK - patient P003: FEVER
+From: cardioia-monitor@localhost
+To: care-team@cardioia.example
+Date: Wed, 04 Nov 2026 19:02:54 -0300
+Message-ID: <179382977420.33484.14310598370941394279@cardioia.local>
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="===============6439830288296803194=="
+
+--===============6439830288296803194==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+CardioIA automatic alert - patient P003
+Reading #168 captured at 2026-11-04T21:56:53.927724Z
+
+Findings:
+- Heart rate 102 bpm [attention]
+- Temperature 38.8 =C2=B0C (limit 38.0 =C2=B0C) [high]
+
+Heart rate: 102 bpm | Temperature: 38.8 =C2=B0C | moving
+
+Suggested action: contact the patient and check the vital signs.
+This is an automatic message from an academic simulation. It is not a diagnos=
+is.
+
+--===============6439830288296803194==
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+<html><body style=3D"font-family: Arial, sans-serif">
+  <h2 style=3D"color:#c62828">CardioIA - high-risk alert</h2>
+  <p>Patient <b>P003</b>, reading #168 captured at
+     2026-11-04T21:56:53.927724Z.</p>
+  <ul><li><b>ELEVATED_HR</b>: Heart rate 102 bpm (attention)</li><li><b>FEVER=
+</b>: Temperature 38.8 =C2=B0C (limit 38.0 =C2=B0C) (high)</li></ul>
+  <p>Heart rate: 102 bpm | Temperature: 38.8 =C2=B0C | moving</p>
+  <p><b>Suggested action:</b> contact the patient and check the vital signs.<=
+/p>
+  <p style=3D"color:#777;font-size:12px">Automatic message from an academic s=
+imulation. Not a diagnosis.</p>
+</body></html>
+
+--===============6439830288296803194==--

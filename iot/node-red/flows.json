@@ -1,0 +1,705 @@
+[
+    {
+        "id": "cardioia_tab",
+        "type": "tab",
+        "label": "CardioIA - Monitoring",
+        "disabled": false,
+        "info": "ESP32 readings via MQTT, limit checks and dashboard at /dashboard/cardioia."
+    },
+    {
+        "id": "comment_main",
+        "type": "comment",
+        "z": "cardioia_tab",
+        "name": "ESP32 -> broker.hivemq.com -> cardioia/vs26/+/vitals -> fog checks -> dashboard",
+        "info": "",
+        "x": 380,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "mqtt_broker",
+        "type": "mqtt-broker",
+        "name": "HiveMQ public broker",
+        "broker": "broker.hivemq.com",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "mqtt_vitals",
+        "type": "mqtt in",
+        "z": "cardioia_tab",
+        "name": "vitals (JSON)",
+        "topic": "cardioia/vs26/+/vitals",
+        "qos": "0",
+        "datatype": "json",
+        "broker": "mqtt_broker",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 180,
+        "wires": [
+            [
+                "fog_fn",
+                "forward_fn"
+            ]
+        ]
+    },
+    {
+        "id": "mqtt_status",
+        "type": "mqtt in",
+        "z": "cardioia_tab",
+        "name": "status (online / Last Will)",
+        "topic": "cardioia/vs26/+/status",
+        "qos": "1",
+        "datatype": "utf8",
+        "broker": "mqtt_broker",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 160,
+        "y": 480,
+        "wires": [
+            [
+                "status_fn"
+            ]
+        ]
+    },
+    {
+        "id": "fog_fn",
+        "type": "function",
+        "z": "cardioia_tab",
+        "name": "Fog: validate + check limits",
+        "func": "// Validates the reading, checks the limits and routes values to the widgets\nconst LIMITS = { bpmHigh: 120, bpmWarn: 100, bpmLow: 50, tempHigh: 38.0, tempWarn: 37.5, tempLow: 35.0 };\nconst LIVE_MAX_AGE_S = 10;   // older readings came from the device buffer\n\nconst p = msg.payload;\nif (!p || typeof p !== 'object' || typeof p.bpm !== 'number') {\n    node.warn('Invalid message ignored: ' + JSON.stringify(p));\n    return null;\n}\nif (p.bpm < 20 || p.bpm > 250 || (p.temp_c !== null && (p.temp_c < 25 || p.temp_c > 45))) {\n    node.warn(`Out-of-range reading ignored (seq ${p.seq})`);\n    return null;\n}\n\n// capture time = now - age\nconst ageS = Number.isFinite(p.age_s) && p.age_s >= 0 ? p.age_s : 0;\nconst capturedAt = Date.now() - ageS * 1000;\nconst live = ageS <= LIVE_MAX_AGE_S;\nconst when = new Date(capturedAt).toLocaleTimeString('pt-BR');\n\nconst reasons = [];\nlet level = 'normal';\nconst raise = (lvl, text) => {\n    reasons.push(text);\n    if (lvl === 'alert' || level === 'normal') level = lvl;\n};\nif (p.bpm > LIMITS.bpmHigh) raise('alert', `Tachycardia: ${p.bpm} bpm (> ${LIMITS.bpmHigh})`);\nelse if (p.bpm < LIMITS.bpmLow) raise('alert', `Bradycardia: ${p.bpm} bpm (< ${LIMITS.bpmLow})`);\nelse if (p.bpm > LIMITS.bpmWarn) raise('warning', `Elevated heart rate: ${p.bpm} bpm`);\nif (typeof p.temp_c === 'number') {\n    if (p.temp_c >= LIMITS.tempHigh) raise('alert', `Fever: ${p.temp_c.toFixed(1)} °C (≥ ${LIMITS.tempHigh})`);\n    else if (p.temp_c < LIMITS.tempLow) raise('alert', `Hypothermia: ${p.temp_c.toFixed(1)} °C (< ${LIMITS.tempLow})`);\n    else if (p.temp_c >= LIMITS.tempWarn) raise('warning', `Low-grade fever: ${p.temp_c.toFixed(1)} °C`);\n} else {\n    raise('warning', 'Temperature sensor without reading');\n}\nif (Array.isArray(p.alerts) && p.alerts.includes('FALL')) raise('alert', 'Possible fall detected by the accelerometer');\n\n// charts: every reading, plotted at its capture time\nconst hrPoints = [\n    { topic: 'Heart rate', payload: { x: capturedAt, y: p.bpm } },\n    { topic: `Limit ${LIMITS.bpmHigh} bpm`, payload: { x: capturedAt, y: LIMITS.bpmHigh } }\n];\nconst tempPoint = typeof p.temp_c === 'number'\n    ? [\n        { topic: 'Temperature', payload: { x: capturedAt, y: p.temp_c } },\n        { topic: `Limit ${LIMITS.tempHigh} °C`, payload: { x: capturedAt, y: LIMITS.tempHigh } }\n    ]\n    : null;\n\n// buffered readings only go to the charts\nif (!live) {\n    const note = level === 'alert'\n        ? { payload: `Recorded while offline at ${when} — ${reasons.join('; ')}` }\n        : null;\n    return [hrPoints, tempPoint, null, null, null, note, null];\n}\n\nflow.set('lastLiveAt', Date.now());\n\nconst detail = `${p.patient} · ${when} · ${p.bpm_source === 'button' ? 'pulse from button' : 'pulse simulated (pot)'}`\n    + ` · ${p.moving ? 'moving' : 'still for ' + p.still_s + ' s'}`;\nconst indicator = { payload: { level, reasons, detail } };\n\n// pop-up only when the problems change\nconst key = level === 'alert' ? reasons.map((r) => r.split(':')[0]).join('|') : '';\nlet notify = null;\nif (key && key !== flow.get('lastAlertKey')) {\n    notify = { payload: `${p.patient}: ${reasons.join('; ')}` };\n}\nflow.set('lastAlertKey', key);\n\nconst info = { payload: `#${p.seq} at ${when} · ${p.buffered || 0} waiting on device` };\n\nreturn [\n    hrPoints,\n    tempPoint,\n    { payload: p.bpm },\n    typeof p.temp_c === 'number' ? { payload: p.temp_c } : null,\n    indicator,\n    notify,\n    info\n];",
+        "outputs": 7,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 180,
+        "outputLabels": [
+            "heart-rate chart",
+            "temperature chart",
+            "bpm gauge",
+            "temperature gauge",
+            "alert indicator",
+            "notification",
+            "info"
+        ],
+        "wires": [
+            [
+                "chart_hr"
+            ],
+            [
+                "chart_temp"
+            ],
+            [
+                "gauge_hr"
+            ],
+            [
+                "gauge_temp"
+            ],
+            [
+                "reset_stale_fn"
+            ],
+            [
+                "notify"
+            ],
+            [
+                "text_info"
+            ]
+        ]
+    },
+    {
+        "id": "reset_stale_fn",
+        "type": "function",
+        "z": "cardioia_tab",
+        "name": "live data arrived",
+        "func": "flow.set('staleShown', false);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 780,
+        "y": 240,
+        "wires": [
+            [
+                "alert_led"
+            ]
+        ]
+    },
+    {
+        "id": "status_fn",
+        "type": "function",
+        "z": "cardioia_tab",
+        "name": "format status",
+        "func": "const online = String(msg.payload).trim() === 'online';\nconst device = msg.topic.split('/')[2];\nmsg.payload = online ? `${device}: online` : `${device}: OFFLINE (connection lost)`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 480,
+        "wires": [
+            [
+                "text_status"
+            ]
+        ]
+    },
+    {
+        "id": "watchdog_inject",
+        "type": "inject",
+        "z": "cardioia_tab",
+        "name": "every 5 s",
+        "props": [],
+        "repeat": "5",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "2",
+        "topic": "",
+        "x": 130,
+        "y": 400,
+        "wires": [
+            [
+                "watchdog_fn"
+            ]
+        ]
+    },
+    {
+        "id": "watchdog_fn",
+        "type": "function",
+        "z": "cardioia_tab",
+        "name": "watchdog: no data for 30 s?",
+        "func": "// no live reading for 30 s -> \"no data\"\nconst last = flow.get('lastLiveAt') || 0;\nif (Date.now() - last < 30000) return null;\nif (flow.get('staleShown')) return null;\nflow.set('staleShown', true);\nreturn { payload: { level: 'nodata', reasons: [], detail: 'No live reading in the last 30 s' } };",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 400,
+        "wires": [
+            [
+                "alert_led"
+            ]
+        ]
+    },
+    {
+        "id": "forward_fn",
+        "type": "function",
+        "z": "cardioia_tab",
+        "name": "to REST API (if CARDIOIA_API_URL)",
+        "func": "// Forwards readings to the REST API when CARDIOIA_API_URL is set\nconst base = env.get('CARDIOIA_API_URL');\nif (!base) return null;\nconst p = msg.payload;\nconst ageS = Number.isFinite(p.age_s) && p.age_s >= 0 ? p.age_s : 0;\nmsg.url = base.replace(/\\/$/, '') + '/api/vitals';\nmsg.method = 'POST';\nmsg.headers = { 'Content-Type': 'application/json' };\nmsg.payload = {\n    patient_id: p.patient,\n    device_id: p.device,\n    seq: p.seq,\n    captured_at: new Date(Date.now() - ageS * 1000).toISOString(),\n    heart_rate: p.bpm,\n    temperature: p.temp_c,\n    humidity: p.humidity,\n    moving: !!p.moving,\n    still_seconds: p.still_s,\n    source: 'esp32-mqtt'\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 560,
+        "wires": [
+            [
+                "http_post"
+            ]
+        ]
+    },
+    {
+        "id": "http_post",
+        "type": "http request",
+        "z": "cardioia_tab",
+        "name": "POST /api/vitals",
+        "method": "use",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 780,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ui_base",
+        "type": "ui-base",
+        "name": "CardioIA",
+        "path": "/dashboard",
+        "appIcon": "",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-notification",
+            "ui-control"
+        ],
+        "showPathInSidebar": false,
+        "headerContent": "page",
+        "navigationStyle": "default",
+        "titleBarStyle": "default",
+        "showReconnectNotification": true,
+        "notificationDisplayTime": 1,
+        "showDisconnectNotification": true,
+        "allowInstall": false
+    },
+    {
+        "id": "ui_theme",
+        "type": "ui-theme",
+        "name": "CardioIA theme",
+        "colors": {
+            "surface": "#1f2a5a",
+            "primary": "#c62828",
+            "bgPage": "#f4f5f8",
+            "groupBg": "#ffffff",
+            "groupOutline": "#d9d9e0"
+        },
+        "sizes": {
+            "density": "default",
+            "pagePadding": "12px",
+            "groupGap": "12px",
+            "groupBorderRadius": "8px",
+            "widgetGap": "12px"
+        }
+    },
+    {
+        "id": "ui_page",
+        "type": "ui-page",
+        "name": "CardioIA - Continuous monitoring",
+        "ui": "ui_base",
+        "path": "/cardioia",
+        "icon": "heart-pulse",
+        "layout": "grid",
+        "theme": "ui_theme",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "order": 1,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "g_status",
+        "type": "ui-group",
+        "name": "Patient P001 - Status",
+        "page": "ui_page",
+        "width": "6",
+        "height": "1",
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "g_gauges",
+        "type": "ui-group",
+        "name": "Vital signs now",
+        "page": "ui_page",
+        "width": "6",
+        "height": "1",
+        "order": 2,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "g_hr",
+        "type": "ui-group",
+        "name": "Heart rate (last 15 min)",
+        "page": "ui_page",
+        "width": "6",
+        "height": "1",
+        "order": 3,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "g_temp",
+        "type": "ui-group",
+        "name": "Body temperature (last 15 min)",
+        "page": "ui_page",
+        "width": "6",
+        "height": "1",
+        "order": 4,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "alert_led",
+        "type": "ui-template",
+        "z": "cardioia_tab",
+        "group": "g_status",
+        "page": "",
+        "ui": "",
+        "name": "Alert indicator (LED)",
+        "order": 1,
+        "width": "6",
+        "height": "3",
+        "head": "",
+        "format": "<template>\n  <div class=\"cardio-alert\" :class=\"'lvl-' + level\">\n    <div class=\"cardio-led\" :title=\"title\"></div>\n    <div class=\"cardio-body\">\n      <div class=\"cardio-title\">{{ title }}</div>\n      <ul v-if=\"reasons.length\" class=\"cardio-reasons\">\n        <li v-for=\"r in reasons\" :key=\"r\">{{ r }}</li>\n      </ul>\n      <div class=\"cardio-detail\">{{ detail }}</div>\n    </div>\n  </div>\n</template>\n\n<script>\nexport default {\n  computed: {\n    level () { return this.msg?.payload?.level || 'nodata' },\n    reasons () { return this.msg?.payload?.reasons || [] },\n    detail () { return this.msg?.payload?.detail || 'Waiting for the first reading...' },\n    title () {\n      return { alert: 'ALERT', warning: 'Attention', normal: 'Normal', nodata: 'No data' }[this.level]\n    }\n  }\n}\n</script>\n\n<style>\n.cardio-alert { display: flex; gap: 16px; align-items: center; padding: 12px; border-radius: 8px; border: 2px solid #ccc; width: 100%; }\n.cardio-led { flex: none; width: 48px; height: 48px; border-radius: 50%; background: #9e9e9e; }\n.cardio-title { font-size: 1.4rem; font-weight: 700; }\n.cardio-reasons { margin: 4px 0 4px 18px; padding: 0; }\n.cardio-detail { font-size: 0.85rem; opacity: 0.75; }\n.lvl-normal { border-color: #2e7d32; }\n.lvl-normal .cardio-led { background: #43a047; box-shadow: 0 0 12px #43a047; }\n.lvl-warning { border-color: #f9a825; }\n.lvl-warning .cardio-led { background: #fbc02d; box-shadow: 0 0 12px #fbc02d; }\n.lvl-alert { border-color: #c62828; background: rgba(198, 40, 40, 0.06); }\n.lvl-alert .cardio-led { background: #e53935; box-shadow: 0 0 16px #e53935; animation: cardio-blink 0.8s infinite; }\n@keyframes cardio-blink { 50% { opacity: 0.3; } }\n</style>\n",
+        "storeOutMessages": true,
+        "passthru": false,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 1040,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "text_status",
+        "type": "ui-text",
+        "z": "cardioia_tab",
+        "group": "g_status",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "Device",
+        "label": "Device",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": true,
+        "className": "",
+        "x": 770,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "text_info",
+        "type": "ui-text",
+        "z": "cardioia_tab",
+        "group": "g_status",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "Last reading",
+        "label": "Last reading",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": true,
+        "className": "",
+        "x": 770,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "gauge_hr",
+        "type": "ui-gauge",
+        "z": "cardioia_tab",
+        "name": "Heart rate",
+        "group": "g_gauges",
+        "order": 1,
+        "value": "payload",
+        "valueType": "msg",
+        "width": 3,
+        "height": 4,
+        "gtype": "gauge-half",
+        "gstyle": "rounded",
+        "title": "Heart rate",
+        "alwaysShowTitle": true,
+        "floatingTitlePosition": "top-left",
+        "units": "bpm",
+        "icon": "heart-pulse",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "30",
+                "color": "#1e88e5"
+            },
+            {
+                "from": "50",
+                "color": "#43a047"
+            },
+            {
+                "from": "100",
+                "color": "#fbc02d"
+            },
+            {
+                "from": "120",
+                "color": "#e53935"
+            }
+        ],
+        "min": 30,
+        "max": 200,
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 770,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "gauge_temp",
+        "type": "ui-gauge",
+        "z": "cardioia_tab",
+        "name": "Temperature",
+        "group": "g_gauges",
+        "order": 2,
+        "value": "payload",
+        "valueType": "msg",
+        "width": 3,
+        "height": 4,
+        "gtype": "gauge-half",
+        "gstyle": "rounded",
+        "title": "Temperature",
+        "alwaysShowTitle": true,
+        "floatingTitlePosition": "top-left",
+        "units": "°C",
+        "icon": "thermometer",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "34",
+                "color": "#1e88e5"
+            },
+            {
+                "from": "35",
+                "color": "#43a047"
+            },
+            {
+                "from": "37.5",
+                "color": "#fbc02d"
+            },
+            {
+                "from": "38",
+                "color": "#e53935"
+            }
+        ],
+        "min": 34,
+        "max": 42,
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 780,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "chart_hr",
+        "type": "ui-chart",
+        "z": "cardioia_tab",
+        "group": "g_hr",
+        "name": "Heart rate",
+        "label": "Heart rate",
+        "order": 1,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "",
+        "xAxisProperty": "x",
+        "xAxisPropertyType": "property",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "bpm",
+        "yAxisProperty": "y",
+        "yAxisPropertyType": "property",
+        "ymin": 30,
+        "ymax": 200,
+        "bins": 10,
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": 2,
+        "showLegend": true,
+        "removeOlder": 15,
+        "removeOlderUnit": "60",
+        "removeOlderPoints": "",
+        "colors": [
+            "#1565c0",
+            "#e53935",
+            "#FF7F0E",
+            "#2CA02C",
+            "#A347E1",
+            "#D62728",
+            "#FF9896",
+            "#9467BD",
+            "#C5B0D5"
+        ],
+        "textColor": [
+            "#666666"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#e5e5e5"
+        ],
+        "gridColorDefault": true,
+        "width": 6,
+        "height": 6,
+        "className": "",
+        "interpolation": "linear",
+        "x": 770,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "chart_temp",
+        "type": "ui-chart",
+        "z": "cardioia_tab",
+        "group": "g_temp",
+        "name": "Temperature",
+        "label": "Temperature",
+        "order": 1,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "",
+        "xAxisProperty": "x",
+        "xAxisPropertyType": "property",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "°C",
+        "yAxisProperty": "y",
+        "yAxisPropertyType": "property",
+        "ymin": 34,
+        "ymax": 42,
+        "bins": 10,
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": 2,
+        "showLegend": true,
+        "removeOlder": 15,
+        "removeOlderUnit": "60",
+        "removeOlderPoints": "",
+        "colors": [
+            "#ef6c00",
+            "#e53935",
+            "#FF7F0E",
+            "#2CA02C",
+            "#A347E1",
+            "#D62728",
+            "#FF9896",
+            "#9467BD",
+            "#C5B0D5"
+        ],
+        "textColor": [
+            "#666666"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#e5e5e5"
+        ],
+        "gridColorDefault": true,
+        "width": 6,
+        "height": 6,
+        "className": "",
+        "interpolation": "linear",
+        "x": 780,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "notify",
+        "type": "ui-notification",
+        "z": "cardioia_tab",
+        "ui": "ui_base",
+        "position": "top right",
+        "colorDefault": false,
+        "color": "#c62828",
+        "displayTime": "8",
+        "showCountdown": true,
+        "outputs": 1,
+        "allowDismiss": true,
+        "dismissText": "Close",
+        "allowConfirm": false,
+        "confirmText": "Confirm",
+        "raw": false,
+        "className": "",
+        "name": "Alert pop-up",
+        "x": 770,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    }
+]

@@ -25,6 +25,9 @@ dist/
 npm-debug.log*
 yarn-error.log*
 
+# PlatformIO / ESP32 builds
+.pio/
+
 # Large or re-downloadable data
 data/images/*.jpg
 data/images/*.jpeg

@@ -1,0 +1,84 @@
+{
+  "readings_sent": {
+    "P001": 40,
+    "P002": 40,
+    "P003": 40,
+    "P004": 40,
+    "P005": 40
+  },
+  "duplicate_detected": true,
+  "email_mode": "dry-run",
+  "attention_events": {
+    "P002": 9,
+    "P003": 7,
+    "P001": 1,
+    "P005": 1,
+    "P004": 1
+  },
+  "alerts": [
+    {
+      "patient_id": "P003",
+      "codes": [
+        "FEVER"
+      ],
+      "message": "Temperature 38.1 °C (limit 38.0 °C)",
+      "reading_id": 118,
+      "notified_to": "care-team@cardioia.example"
+    },
+    {
+      "patient_id": "P002",
+      "codes": [
+        "TACHYCARDIA"
+      ],
+      "message": "Heart rate 128 bpm (limit 120 bpm)",
+      "reading_id": 122,
+      "notified_to": "care-team@cardioia.example"
+    },
+    {
+      "patient_id": "P005",
+      "codes": [
+        "FALL"
+      ],
+      "message": "Possible fall detected by the accelerometer",
+      "reading_id": 130,
+      "notified_to": "care-team@cardioia.example"
+    },
+    {
+      "patient_id": "P003",
+      "codes": [
+        "FEVER"
+      ],
+      "message": "Temperature 38.8 °C (limit 38.0 °C)",
+      "reading_id": 168,
+      "notified_to": "care-team@cardioia.example"
+    },
+    {
+      "patient_id": "P002",
+      "codes": [
+        "TACHYCARDIA"
+      ],
+      "message": "Heart rate 157 bpm (limit 120 bpm)",
+      "reading_id": 172,
+      "notified_to": "care-team@cardioia.example"
+    },
+    {
+      "patient_id": "P004",
+      "codes": [
+        "NO_MOVEMENT"
+      ],
+      "message": "No movement for 31 min with abnormal heart rate (48 bpm)",
+      "reading_id": 179,
+      "notified_to": "care-team@cardioia.example"
+    },
+    {
+      "patient_id": "P004",
+      "codes": [
+        "BRADYCARDIA",
+        "NO_MOVEMENT"
+      ],
+      "message": "Heart rate 46 bpm (limit 50 bpm); No movement for 32 min with abnormal heart rate (46 bpm)",
+      "reading_id": 184,
+      "notified_to": "care-team@cardioia.example"
+    }
+  ]
+}

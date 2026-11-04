@@ -8,6 +8,7 @@ const MENU = [
   { to: '/dashboard', label: 'Dashboard', icon: 'dashboard' },
   { to: '/patients', label: 'Patients', icon: 'users' },
   { to: '/appointments', label: 'Appointments', icon: 'calendar' },
+  { to: '/monitoring', label: 'Monitoring', icon: 'activity' },
 ];
 
 /** Structure of the internal pages: sidebar + header + route content (<Outlet />). */
@@ -36,7 +37,7 @@ export default function Layout() {
             <Icon name="heart" size={18} />
           </span>
           <span>
-            CardioIA <small>Phase 2</small>
+            CardioIA <small>Phase 3</small>
           </span>
           <button className={styles.close} onClick={() => setMenuOpen(false)} aria-label="Close menu">
             <Icon name="close" />

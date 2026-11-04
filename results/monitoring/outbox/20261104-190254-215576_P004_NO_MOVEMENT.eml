@@ -1,0 +1,46 @@
+Subject: [CardioIA] HIGH RISK - patient P004: NO_MOVEMENT
+From: cardioia-monitor@localhost
+To: care-team@cardioia.example
+Date: Wed, 04 Nov 2026 19:02:54 -0300
+Message-ID: <179382977421.33484.12036877081353114707@cardioia.local>
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="===============4920795956370888210=="
+
+--===============4920795956370888210==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+CardioIA automatic alert - patient P004
+Reading #179 captured at 2026-11-04T21:58:53.927845Z
+
+Findings:
+- Heart rate 48 bpm (limit 50 bpm) [attention]
+- No movement for 31 min with abnormal heart rate (48 bpm) [high]
+
+Heart rate: 48 bpm | Temperature: 36.4 =C2=B0C | still for 1860 s
+
+Suggested action: contact the patient and check the vital signs.
+This is an automatic message from an academic simulation. It is not a diagnos=
+is.
+
+--===============4920795956370888210==
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+<html><body style=3D"font-family: Arial, sans-serif">
+  <h2 style=3D"color:#c62828">CardioIA - high-risk alert</h2>
+  <p>Patient <b>P004</b>, reading #179 captured at
+     2026-11-04T21:58:53.927845Z.</p>
+  <ul><li><b>BRADYCARDIA</b>: Heart rate 48 bpm (limit 50 bpm) (attention)</l=
+i><li><b>NO_MOVEMENT</b>: No movement for 31 min with abnormal heart rate (48=
+ bpm) (high)</li></ul>
+  <p>Heart rate: 48 bpm | Temperature: 36.4 =C2=B0C | still for 1860 s</p>
+  <p><b>Suggested action:</b> contact the patient and check the vital signs.<=
+/p>
+  <p style=3D"color:#777;font-size:12px">Automatic message from an academic s=
+imulation. Not a diagnosis.</p>
+</body></html>
+
+--===============4920795956370888210==--
