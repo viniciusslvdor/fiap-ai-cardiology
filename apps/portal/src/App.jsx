@@ -1,3 +1,4 @@
+import { Suspense, lazy } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout/Layout.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
@@ -6,6 +7,9 @@ import Dashboard from './pages/Dashboard/Dashboard.jsx';
 import Patients from './pages/Patients/Patients.jsx';
 import Appointments from './pages/Appointments/Appointments.jsx';
 import NotFound from './pages/NotFound/NotFound.jsx';
+import Loading from './components/Loading/Loading.jsx';
+
+const Monitoring = lazy(() => import('./pages/Monitoring/Monitoring.jsx'));
 
 export default function App() {
   return (
@@ -18,6 +22,14 @@ export default function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/patients" element={<Patients />} />
           <Route path="/appointments" element={<Appointments />} />
+          <Route
+            path="/monitoring"
+            element={
+              <Suspense fallback={<Loading text="Loading monitoring..." />}>
+                <Monitoring />
+              </Suspense>
+            }
+          />
         </Route>
       </Route>
 

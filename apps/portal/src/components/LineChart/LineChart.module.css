@@ -1,0 +1,60 @@
+.wrapper {
+  position: relative;
+}
+
+.chart {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.grid {
+  stroke: var(--color-border);
+  stroke-width: 1;
+}
+
+.yLabel,
+.xLabel,
+.limitLabel {
+  font-family: var(--font);
+  font-size: 11px;
+  fill: var(--color-text-muted);
+}
+
+.yLabel {
+  text-anchor: end;
+  dominant-baseline: middle;
+}
+
+.xLabel {
+  text-anchor: middle;
+}
+
+.limit {
+  stroke: var(--color-danger);
+  stroke-width: 1.5;
+  stroke-dasharray: 6 4;
+}
+
+.limitLabel {
+  text-anchor: start;
+  fill: var(--color-danger);
+  font-weight: 600;
+}
+
+.line {
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.empty {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}

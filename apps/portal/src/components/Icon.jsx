@@ -13,6 +13,10 @@ const PATHS = {
   trash: 'M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6',
   inbox: 'M22 12h-6l-2 3h-4l-2-3H2M5.5 5h13l3.5 7v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-6z',
   check: 'M20 6 9 17l-5-5',
+  activity: 'M22 12h-4l-3 9L9 3l-3 9H2',
+  thermometer: 'M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z',
+  move: 'M5 9l-3 3 3 3M9 5l3-3 3 3M15 19l-3 3-3-3M19 9l3 3-3 3M2 12h20M12 2v20',
+  wifi: 'M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01',
 };
 
 export default function Icon({ name, size = 20, ...props }) {

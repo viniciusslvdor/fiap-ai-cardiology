@@ -2,7 +2,7 @@
   "name": "cardioia-portal",
   "private": true,
   "version": "1.0.0",
-  "description": "CardioIA Phase 2 - Academic portal (React + Vite) with simulated authentication, patients and appointments.",
+  "description": "CardioIA - Academic portal (React + Vite) with simulated authentication, patients, appointments and real-time monitoring.",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "mqtt": "^5.16.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.28.0"
